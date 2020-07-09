@@ -1,9 +1,12 @@
 print("*** WELCOME TO THE TIC TAC TOE ***")
 print("please enter the size of the board")
+print("The minimum size should be 3")
 
 size = int(input())
-
-itr = ((size * size)//2)+1
+if (size%2 == 0):
+    itr = ((size * size)//2)
+else:
+    itr = ((size * size)//2)+1
 board = []
 k = 0
 f = 0
@@ -16,11 +19,13 @@ for i in range(size):
         sl.append(k)
     board.append(sl)
 
-    
-for i in range(size):
-    for j in range(size):
-        print(board[i][j],end=" ")
-    print("\n")
+def display():
+    for i in range(size):
+        for j in range(size):
+            print(board[i][j],end=" ")
+        print("\n")
+
+display()        
 
 def row_search(sym):
     for i in board:
@@ -69,14 +74,11 @@ def change(num,sym):
             i[index] = sym
 
 for t in range(itr):
-    x_num = int(input("Enter the number to place x"))
+    x_num = int(input("Enter the number to place x "))
     change(x_num,'x')
     
-    for i in range(size):
-        for j in range(size):
-            print(board[i][j],end=" ")
-        print("\n")
-    
+    display()
+
     row_search('x')
     if  f == 1:
         break
@@ -89,16 +91,13 @@ for t in range(itr):
     if  f == 1:
         break
 
-    if(t==4):
-        break
-    
-    y_num = int(input("Enter the number to place o"))
+    if(size%2 != 0):
+        if(t == itr-1):
+            break
+    y_num = int(input("Enter the number to place o "))
     change(y_num,'o')
     
-    for i in range(size):
-        for j in range(size):
-            print(board[i][j],end=" ")
-        print("\n")
+    display()
     
     row_search('y')
     if f == 1:
